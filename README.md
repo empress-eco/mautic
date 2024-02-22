@@ -1,114 +1,71 @@
-## Mautic
+# Empress Mautic Integration
 
-#### Installation
+![Empress Mautic Integration](https://grow.empress.eco/uploads/default/original/2X/1/1f1e1044d3864269d2a613577edb9763890422ab.png
 
-This application requires [Frappe](https://github.com/frappe/frappe) and [ERPNext](https://github.com/frappe/erpnext) v10.0, v11.0 (not tested on higher versions).
+Welcome to Empress Mautic Integration, a powerful solution that seamlessly integrates your Empress system with Mautic, enhancing your marketing automation capabilities.
 
-1. `bench get-app mautic https://github.com/DOKOS-IO/mautic/`
-2. `bench install-app mautic`
-3. `bench restart && bench migrate`
+- [Explore the Docs](https://grow.empress.eco/)
+- [Report Bug](https://github.com/empress-eco/mautic/issues)
+- [Request Feature](https://github.com/empress-eco/mautic/issues/new)
 
-#### Mautic configuration
+## About The Project
 
-In Mautic:
-* in the Configuration > API Settings, enable API and HTTP Basic Auth then _Save & Close_
-* in the API Credentials, create new API credentials for OAuth2:
-  * enter a name to identify your ERPNext instance
-  * enter the redirect URI like this `{https://your.erpnext.site}?cmd=mautic.mautic.doctype.mautic_settings.mautic_settings.mautic_callback&grant_type=authorization_code&response_type=code,`:
-    * make sure to use the correct protocol (`http` or `https`) given your frappe hostname and SSL configuration
-    * (of course) adapt the domain name
-    * do not leave any trailing `/` at the end of your domain name
-    * you can add more URI by separating them by a `,`
-    * make sure to always have a `,` at the end or Mautic will not use the URI :warning:
-* _Save & Close_
+Empress Mautic Integration is designed for Empress users looking to leverage the power of Mautic's marketing automation. It eliminates the tedious task of manual data transfer between your ERP and Mautic by automating the process. This not only saves time and reduces errors but also heightens your marketing efforts.
 
+### Key Features
 
-#### ERPNext Mautic configuration
+- Sync Mautic Segment with Empress "Mautic Segment"
+- Link Mautic Company with Empress Customer
+- Connect Mautic Contact with Empress Contact
+- Map Empress Customer to Mautic Companies
+- Align Empress Contact to Mautic Contact
 
-In ERPNext:
-* enable Mautic
-* add your API credentials:
-  * enter the link to your Mautic instance, **without any trailing slash**: `https://your.mautic.site`
-  * copy the "_Public Key_" from Mautic to the _Client ID_
-  * copy the "_Secret Key_" from Mautic to the _Client Secret_
-* save
-* click on "Allow Mautic Access" (you should be redirected to your Mautic instance)
-  * login as administrator
-  * when prompted, accept the application to connect to Mautic
+## Technical Stack and Setup Instructions
 
-The application is scheduled to run hourly by default.
-Verify that your scheduler is enabled (`bench enable-scheduler`).
+This application requires Empress and Empress v10.0, v11.0 (not tested on higher versions).
 
-Your ERPNext and Mautic sites need to have SSL certificates.
+### Installation
 
-#### Features
+Clone the Empress Mautic Integration repository:
 
-##### Mautic Segment to ERPNext "Mautic Segment"
+```sh
+bench get-app mautic https://github.com/empress-eco/mautic.git
+```
 
-*Basic Mapping*  
+Install the application:
 
-|Source|Flow|Target|
-|---|---|---|
-|Name| --> |Segment Name|
-|Description| --> |Segment Description|
+```sh
+bench install-app mautic
+```
 
-##### Mautic Company to ERPNext Customer
+Restart and migrate the bench:
 
-*Basic Mapping*  
+```sh
+bench restart && bench migrate
+```
 
-|Source|Flow|Target|
-|---|---|---|
-|Company Name| --> |Customer Name|
-|Company Website| --> |Customer Website|
+Refer to the Mautic and Empress Mautic configuration sections in the [documentation](https://grow.empress.eco/) for detailed setup instructions.
 
-*Post Processing*  
+## Usage
 
-If no address called "*CustomerName*-Mautic" exists, a new one is created.  
-Else the existing one is updated.
+After installation and configuration, the application is scheduled to run hourly by default. Ensure that your scheduler is enabled using the command: `bench enable-scheduler`.
 
-##### Mautic Contact to ERPNext Contact
+## Contribution Guidelines
 
-*Basic Mapping*  
+We greatly appreciate and value your contributions! Here's how you can contribute:
 
-|Source|Flow|Target|
-|---|---|---|
-|Contact First Name| --> |Contact First Name|
-|Contact Last Name| --> |Contact Last Name|
-|Contact Email| --> |Contact Email ID|
-|Contact Segment| --> |Contact Segment| (Only one segment is synchronized for now)
+- Fork the Project
+- Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+- Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+- Push to the Branch (`git push origin feature/AmazingFeature`)
+- Open a Pull Request
 
-*Post Processing*  
+## License and Acknowledgements
 
-If the contact in Mautic is linked to an organization, the contact in ERPNext is linked to the corresponding Customer or Lead (*company_name* field).  
-Else a new Lead is created and linked to the contact.
+### License
 
-##### ERPNext Customer to Mautic Companies
+This project is under the MIT License. Your contributions are also licensed under the MIT License.
 
-*Basic Mapping*  
+### Acknowledgements
 
-|Source|Flow|Target|
-|---|---|---|
-|Customer Name| --> |Company Name|
-|Customer Website| --> |Company Website|
-
-##### ERPNext Contact to Mautic Contact
-
-*Basic Mapping*  
-
-|Source|Flow|Target|
-|---|---|---|
-|Contact Salutation| --> |Contact Title|
-|Contact First Name| --> |Contact First Name|
-|Contact Last Name| --> |Contact Last Name|
-|Contact Email ID| --> |Contact Email|
-|Contact Phone| --> |Contact Phone|
-|Contact Mobile No| --> |Contact Mobile|
-|Contact Linked Customer| --> |Contact Company|
-
-*Pre Processing*
-
-If the contact is not linked to a customer or a lead, it is not sent to Mautic.
-If the contact's email address is "Guest", it is not sent to Mautic.
-
-#### License
-GPLv3
+We express our profound gratitude to the Empress Community, the architects behind the essential tools that power this project. Their innovation and dedication have been invaluable in building the foundations and functionalities we rely on. We are profoundly grateful for their pioneering work and ongoing support.
