@@ -1,12 +1,19 @@
+
+
+<div align="center">
+
+<img src="https://grow.empress.eco/uploads/default/original/2X/1/1f1e1044d3864269d2a613577edb9763890422ab.png" alt="Logo" width="80" height="80">
+
 # Empress Mautic Integration
 
-![Empress Mautic Integration](https://grow.empress.eco/uploads/default/original/2X/1/1f1e1044d3864269d2a613577edb9763890422ab.png
 
 Welcome to Empress Mautic Integration, a powerful solution that seamlessly integrates your Empress system with Mautic, enhancing your marketing automation capabilities.
 
-- [Explore the Docs](https://grow.empress.eco/)
-- [Report Bug](https://github.com/empress-eco/mautic/issues)
-- [Request Feature](https://github.com/empress-eco/mautic/issues/new)
+[Explore the Docs](https://grow.empress.eco/) |  [Report Bug](https://github.com/empress-eco/mautic/issues) | [Request Feature](https://github.com/empress-eco/mautic/issues/new)
+
+</div>
+
+
 
 ## About The Project
 
